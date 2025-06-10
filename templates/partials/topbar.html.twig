@@ -58,7 +58,7 @@
                 </div>
             </div>
 
-            <div class="dropdown d-inline-block language-switch">
+            {# <div class="dropdown d-inline-block language-switch">
                 <button type="button" class="btn header-item waves-effect"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {% if app.request.locale == 'en' %}
@@ -113,9 +113,9 @@
                     {% endif %}
                     
                 </div>
-            </div>
+            </div> #}
 
-            <div class="dropdown d-none d-lg-inline-block ms-1">
+            {# <div class="dropdown d-none d-lg-inline-block ms-1">
                 <button type="button" class="btn header-item noti-icon waves-effect"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="uil-apps"></i>
@@ -165,6 +165,20 @@
                         </div>
                     </div>
                 </div>
+            </div> #}
+
+             <!-- LIGHT / DARK MODE -->
+            <div class="d-flex justify-content-center align-items-center my-2">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="layout-mode"
+                    id="layout-mode-light" value="light">
+                <label class="form-check-label" for="layout-mode-light">Light</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="layout-mode"
+                    id="layout-mode-dark" value="dark">
+                <label class="form-check-label" for="layout-mode-dark">Dark</label>
+            </div>
             </div>
 
             <div class="dropdown d-none d-lg-inline-block ms-1">

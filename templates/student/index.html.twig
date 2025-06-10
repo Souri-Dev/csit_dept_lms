@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Student List{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1>Student List</h1>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Student Number</th>
+                    <th>Name</th>
+                    <th>Course</th>
+                    <th>Section</th>
+                    <th>QR</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                    <tr>
+                        <td>{{ student.studentNumber }}</td>
+                        <td>{{ student.name }}</td>
+                        <td>{{ student.course }}</td>
+                        <td>{{ student.section }}</td>
+                        <td>
+                            <img src="{{ path('app_student_qr', {id: student.id}) }}" alt="QR Code" width="100">
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">No students found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -12,9 +12,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Uid\Uuid;
 use Endroid\QrCode\QrCode;
-use Endroid\QrCode\Writer\PngWriter;
 use Endroid\QrCode\Encoding\Encoding;
-use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelHigh;
+use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevel;
+use Endroid\QrCode\Writer\PngWriter;
 
 
 final class StudentController extends AbstractController
@@ -56,29 +56,26 @@ final class StudentController extends AbstractController
         ]);
     }
 
-        #[Route('/student/{id}/qr', name: 'app_student_qr')]
-            public function generateQr(Student $student): Response
-                {
-                    $qrValue = $student->getQr() ?: 'no-qr-value';
 
-                    // Create QR code with all parameters in constructor:
-                    $qrCode = new QrCode(
-                        $qrValue,
-                        new Encoding('UTF-8'),
-                        new ErrorCorrectionLevelHigh(),
-                        300, // size
-                        10   // margin
-                    );
 
-                    $writer = new PngWriter();
-                    $result = $writer->write($qrCode);
 
-                    return new Response(
-                        $result->getString(),
-                        Response::HTTP_OK,
-                        ['Content-Type' => 'image/png']
-                    );
-                }
+#[Route('/student/{id}/qr', name: 'app_student_qr')]
+public function generateQr(Student $student): Response
+{
+    $qrValue = $student->getQr() ?: 'no-qr-value';
+
+    $qrCode = new QrCode($qrValue);
+
+    $writer = new PngWriter();
+    $result = $writer->write($qrCode);
+
+    return new Response(
+        $result->getString(),
+        Response::HTTP_OK,
+        ['Content-Type' => $result->getMimeType()]
+    );
+}
+
 
  
 

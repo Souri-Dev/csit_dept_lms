@@ -62,14 +62,14 @@
                 </li>
 
                 <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                    <a href="{{ path('app_student_index') }}" class="waves-effect">
                         <i class="fas fa-user-graduate"></i>
                         <span>{% trans %}Students{% endtrans %}</span>
                     </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="contacts-grid">{% trans %}All Students{% endtrans %}</a></li>
+                    {# <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ path('app_student_index') }}">{% trans %}All Students{% endtrans %}</a></li>
                         <li><a href="contacts-list">{% trans %}Add Student{% endtrans %}</a></li>
-                    </ul>
+                    </ul> #}
                 </li>
 
                 <li class="menu-title">{% trans %}Pages{% endtrans %}</li>

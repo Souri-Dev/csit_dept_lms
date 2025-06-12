@@ -365,9 +365,10 @@
                                         </div>
 
                                         <!--  Student Profile modal example -->
+                                        <div id="student-profile-modal">
                                                 <div class="modal fade student_profile_modal" tabindex="-1" role="dialog" aria-labelledby="student_profile_modal" aria-hidden="true">
                                                     <div class="modal-dialog modal-lg">
-                                                        <div class="modal-content">
+                                                        <div class="modal-content printable-pdf">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="student_profile_modal">Student Profile</h5>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
@@ -432,11 +433,12 @@
                                                                 </div>
                                                                 </div>
                                                             </div>
-
+                                                            <button class="btn btn-success" id="download_button" onclick="downloadProfilePDF()">Download Profile</button>
                                                             </div>
                                                         </div><!-- /.modal-content -->
                                                     </div><!-- /.modal-dialog -->
                                                 </div><!-- /.modal -->
+                                            </div>
                                         <div class="row mt-4">
                                             <div class="col-sm-6">
                                                 <div>
@@ -513,6 +515,41 @@
         });
     });
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<script>
+function downloadProfilePDF() {
+    const studentName = document.querySelector('#modalStudentName')?.textContent.trim() || 'student_profile';
+    const safeFileName = studentName.replace(/[^\w\s-]/g, '').replace(/\s+/g, '_');
+    const modalContent = document.querySelector('.printable-pdf');
+    const downloadButton = document.getElementById('download_button');
+
+    // Temporarily hide the button in the live DOM
+    if (downloadButton) downloadButton.style.display = 'none';
+
+    const options = {
+        margin: 0.5,
+        filename: `${safeFileName}_profile.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: {
+            scale: 2
+        },
+        jsPDF: { unit: 'in', format: [11, 6.5], orientation: 'landscape' },
+    };
+
+    setTimeout(() => {
+        html2pdf().set(options).from(modalContent).save().then(() => {
+            // Show the button again after saving the PDF
+            if (downloadButton) downloadButton.style.display = '';
+        });
+    }, 300);
+}
+</script>
+
+
+
+
+
 
 
 {% endblock %}

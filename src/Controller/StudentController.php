@@ -41,8 +41,8 @@ final class StudentController extends AbstractController
             $em->flush();
 
             // Redirect to a show page (optional)
-            return $this->redirectToRoute('app_student_show', [
-                'id' => $student->getId(),
+            return $this->redirectToRoute('app_student_index', [
+                // 'id' => $student->getId(),
             ]);
         }
 

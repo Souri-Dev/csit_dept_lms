@@ -344,11 +344,11 @@
                                                         <td>{{ students.course }}</td>
                                                         <td>{{ students.section }}</td>
                                                         <td>
-                                                            <a href="{{ path('app_student_qr', { id: students.id }) }}" target="_blank" class="text-body uil-eye font-size-18">
+                                                            {# <a href="{{ path('app_student_qr', { id: students.id }) }}" target="_blank" class="text-body uil-eye font-size-18">
                                                             <span class="font-size-12">View QR Code</span>
-                                                            {# Uncomment the line below to display the QR code image #}
-                                                            {# <img src="{{ path('app_student_qr', {id: students.id}) }}" alt="QR Code" width="100"> #}
-                                                            </a>
+                                                            Uncomment the line below to display the QR code image
+                                                            <img src="{{ path('app_student_qr', {id: students.id}) }}" alt="QR Code" width="100">
+                                                            </a> #}
                                                             <button 
                                                                 type="button" 
                                                                 class="btn btn-success view-student-btn"

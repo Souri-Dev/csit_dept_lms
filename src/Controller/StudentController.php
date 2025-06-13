@@ -108,8 +108,6 @@ final class StudentController extends AbstractController
     }
 
 
-
-
     #[Route('/student/{id}/qr', name: 'app_student_qr')]
     public function generateQr(Student $student): Response
     {

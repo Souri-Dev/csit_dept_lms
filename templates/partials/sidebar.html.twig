@@ -1,111 +1,143 @@
 <!-- ========== Left Sidebar Start ========== -->
 <div class="vertical-menu">
 
-    <!-- LOGO -->
-    {# <div class="navbar-brand-box">
-        <a href="#" class="logo logo-dark">
-            <span class="logo-sm">
-                <img src="/images/logo-sm.png" alt="" height="22">
-            </span>
-            <span class="logo-lg">
-                <img src="/images/logo-dark.png" alt="" height="20">
-            </span>
-        </a>
+	<!-- LOGO -->
+	{# <div class="navbar-brand-box">
+					        <a href="#" class="logo logo-dark">
+					            <span class="logo-sm">
+					                <img src="/images/logo-sm.png" alt="" height="22">
+					            </span>
+					            <span class="logo-lg">
+					                <img src="/images/logo-dark.png" alt="" height="20">
+					            </span>
+					        </a>
+					
+					        <a href="#" class="logo logo-light">
+					            <span class="logo-sm">
+					                <img src="/images/logo-sm.png" alt="" height="22">
+					            </span>
+					            <span class="logo-lg">
+					                <img src="/images/logo-light.png" alt="" height="20">
+					            </span>
+					        </a>
+					    </div> #}
 
-        <a href="#" class="logo logo-light">
-            <span class="logo-sm">
-                <img src="/images/logo-sm.png" alt="" height="22">
-            </span>
-            <span class="logo-lg">
-                <img src="/images/logo-light.png" alt="" height="20">
-            </span>
-        </a>
-    </div> #}
+		<button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect vertical-menu-btn"> <i class="fa fa-fw fa-bars"></i>
+	</button>
 
-    <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect vertical-menu-btn">
-        <i class="fa fa-fw fa-bars"></i>
-    </button>
+	<div
+		data-simplebar class="sidebar-menu-scroll">
 
-    <div data-simplebar class="sidebar-menu-scroll">
+		<!--- Sidemenu -->
+		<div
+			id="sidebar-menu">
+			<!-- Left Menu Start -->
+			<ul class="metismenu list-unstyled" id="side-menu">
+				<li class="menu-title">{% trans %}Menu{% endtrans %}</li>
 
-        <!--- Sidemenu -->
-        <div id="sidebar-menu">
-            <!-- Left Menu Start -->
-            <ul class="metismenu list-unstyled" id="side-menu">
-                <li class="menu-title">{% trans %}Menu{% endtrans %}</li>
+				<li>
+					<a href="{{ path('app_dashboard') }}">
+						<i class="uil-home-alt"></i>
+						<span class="badge rounded-pill bg-primary float-end">01</span>
+						<span>{% trans %}Dashboard{% endtrans %}</span>
+					</a>
+				</li>
 
-                <li>
-                    <a href="#">
-                        <i class="uil-home-alt"></i><span class="badge rounded-pill bg-primary float-end">01</span>
-                        <span>{% trans %}Dashboard{% endtrans %}</span>
-                    </a>
-                </li>
+				<li class="menu-title">{% trans %}Apps{% endtrans %}</li>
 
-                <li class="menu-title">{% trans %}Apps{% endtrans %}</li>
+				<li>
+					<a href="javascript: void(0);" class="has-arrow waves-effect">
+						<i class="uil-calender"></i>
+						<span>{% trans %}Attendance{% endtrans %}</span>
+					</a>
+					<ul class="sub-menu" aria-expanded="false">
+						<li>
+							<a href="#">{% trans %}Take Attendance{% endtrans %}</a>
+						</li>
+						<li>
+							<a href="#">{% trans %}Show Attendance{% endtrans %}</a>
+						</li>
+					</ul>
+				</li>
 
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="uil-calender"></i>
-                        <span>{% trans %}Attendance{% endtrans %}</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="#">{% trans %}Take Attendance{% endtrans %}</a></li>
-                        <li><a href="#">{% trans %}Show Attendance{% endtrans %}</a></li>
-                    </ul>
-                </li>
+				<li>
+					<a href="{{ path('app_subject') }}" class="waves-effect">
+						<i class="fas fa-chalkboard-teacher"></i>
+						<span>{% trans %}Classes{% endtrans %}</span>
+					</a>
+				</li>
 
-                <li>
-                    <a href="javascript: void(0);" class="waves-effect">
-                        <i class="fas fa-chalkboard-teacher"></i>
-                        <span>{% trans %}Classes{% endtrans %}</span>
-                    </a>
-                </li>
+				<li>
+					<a href="{{ path('app_student_index') }}" class="waves-effect">
+						<i class="fas fa-user-graduate"></i>
+						<span>{% trans %}Students{% endtrans %}</span>
+					</a>
+					{# <ul class="sub-menu" aria-expanded="false">
+																									                        <li><a href="{{ path('app_student_index') }}">{% trans %}All Students{% endtrans %}</a></li>
+																									                        <li><a href="contacts-list">{% trans %}Add Student{% endtrans %}</a></li>
+																									                    </ul> #}
+				</li>
 
-                <li>
-                    <a href="{{ path('app_student_index') }}" class="waves-effect">
-                        <i class="fas fa-user-graduate"></i>
-                        <span>{% trans %}Students{% endtrans %}</span>
-                    </a>
-                    {# <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{ path('app_student_index') }}">{% trans %}All Students{% endtrans %}</a></li>
-                        <li><a href="contacts-list">{% trans %}Add Student{% endtrans %}</a></li>
-                    </ul> #}
-                </li>
+				<li class="menu-title">{% trans %}Pages{% endtrans %}</li>
 
-                <li class="menu-title">{% trans %}Pages{% endtrans %}</li>
+				<li>
+					<a href="javascript: void(0);" class="has-arrow waves-effect">
+						<i class="uil-user-circle"></i>
+						<span>{% trans %}Authentication{% endtrans %}</span>
+					</a>
+					<ul class="sub-menu" aria-expanded="false">
+						<li>
+							<a href="auth-login">{% trans %}Login{% endtrans %}</a>
+						</li>
+						<li>
+							<a href="auth-register">{% trans %}Register{% endtrans %}</a>
+						</li>
+						<li>
+							<a href="auth-recoverpw">{% trans %}Recover Password{% endtrans %}</a>
+						</li>
+						<li>
+							<a href="auth-lock-screen">{% trans %}Lock Screen{% endtrans %}</a>
+						</li>
+					</ul>
+				</li>
 
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="uil-user-circle"></i>
-                        <span>{% trans %}Authentication{% endtrans %}</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="auth-login">{% trans %}Login{% endtrans %}</a></li>
-                        <li><a href="auth-register">{% trans %}Register{% endtrans %}</a></li>
-                        <li><a href="auth-recoverpw">{% trans %}Recover Password{% endtrans %}</a></li>
-                        <li><a href="auth-lock-screen">{% trans %}Lock Screen{% endtrans %}</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="uil-file-alt"></i>
-                        <span>{% trans %}Utility{% endtrans %}</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="pages-starter">{% trans %}Starter Page{% endtrans %}</a></li>
-                        <li><a href="pages-maintenance">{% trans %}Maintenance{% endtrans %}</a></li>
-                        <li><a href="pages-comingsoon">{% trans %}Coming Soon{% endtrans %}</a></li>
-                        <li><a href="pages-timeline">{% trans %}Timeline{% endtrans %}</a></li>
-                        <li><a href="pages-faqs">{% trans %}FAQs{% endtrans %}</a></li>
-                        <li><a href="pages-pricing">{% trans %}Pricing{% endtrans %}</a></li>
-                        <li><a href="pages-404">{% trans %}Error{% endtrans %} 404</a></li>
-                        <li><a href="pages-500">{% trans %}Error{% endtrans %} 500</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        <!-- Sidebar -->
-    </div>
+				<li>
+					<a href="javascript: void(0);" class="has-arrow waves-effect">
+						<i class="uil-file-alt"></i>
+						<span>{% trans %}Utility{% endtrans %}</span>
+					</a>
+					<ul class="sub-menu" aria-expanded="false">
+						<li>
+							<a href="pages-starter">{% trans %}Starter Page{% endtrans %}</a>
+						</li>
+						<li>
+							<a href="pages-maintenance">{% trans %}Maintenance{% endtrans %}</a>
+						</li>
+						<li>
+							<a href="pages-comingsoon">{% trans %}Coming Soon{% endtrans %}</a>
+						</li>
+						<li>
+							<a href="pages-timeline">{% trans %}Timeline{% endtrans %}</a>
+						</li>
+						<li>
+							<a href="pages-faqs">{% trans %}FAQs{% endtrans %}</a>
+						</li>
+						<li>
+							<a href="pages-pricing">{% trans %}Pricing{% endtrans %}</a>
+						</li>
+						<li>
+							<a href="pages-404">{% trans %}Error{% endtrans %}
+								404</a>
+						</li>
+						<li>
+							<a href="pages-500">{% trans %}Error{% endtrans %}
+								500</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<!-- Sidebar -->
+	</div>
 </div>
 <!-- Left Sidebar End -->

@@ -46,9 +46,18 @@ final class StudentController extends AbstractController
             ]);
         }
 
+        $editForms = [];
+        foreach ($students as $s) {
+            $editForms[$s->getId()] = $this->createForm(StudentType::class, $s, [
+                'action' => $this->generateUrl('app_student_edit', ['id' => $s->getId()]),
+                'method' => 'POST',
+            ])->createView();
+        }
+
         return $this->render('student/index.html.twig', [
             'students' => $students,
             'form' => $form->createView(),
+            'editForms' => $editForms,
         ]);
 
         $qrValue = $student->getQr() ?: 'no-qr-value';
@@ -65,37 +74,10 @@ final class StudentController extends AbstractController
         );
     }
 
-    // #[Route('/student/new', name: 'app_student_new')]
-    // public function new(Request $request, EntityManagerInterface $em): Response
-    // {
-    //     $student = new Student();
-
-    //     $form = $this->createForm(StudentType::class, $student);
-    //     $form->handleRequest($request);
-
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //         // Generate a UUID string for QR field
-    //         $student->setQr(Uuid::v4()->toRfc4122());
-
-    //         $em->persist($student);
-    //         $em->flush();
-
-    //         // Redirect to a show page (optional)
-    //         return $this->redirectToRoute('app_student_show', [
-    //             'id' => $student->getId(),
-    //         ]);
-    //     }
-
-    //     return $this->render('student/new.html.twig', [
-    //         'form' => $form->createView(),
-    //     ]);
-    // }
-
     #[Route('/student/{id}/json', name: 'app_student_json', methods: ['GET'])]
     public function getStudentJson(Student $student): Response
     {
         $qrUrl = $this->generateUrl('app_student_qr', ['id' => $student->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
-
 
         return $this->json([
             'id' => $student->getId(),
@@ -123,6 +105,40 @@ final class StudentController extends AbstractController
             Response::HTTP_OK,
             ['Content-Type' => $result->getMimeType()]
         );
+    }
+
+    #[Route('/student/{id}/edit', name: 'app_student_edit', methods: ['POST'])]
+    public function edit(Request $request, Student $student, EntityManagerInterface $em): Response
+    {
+        $form = $this->createForm(StudentType::class, $student, [
+            'action' => $this->generateUrl('app_student_edit', ['id' => $student->getId()]),
+            'method' => 'POST',
+        ]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+            $this->addFlash('success', 'Student updated successfully.');
+            return $this->redirectToRoute('app_student_index');
+        }
+
+        $students = $em->getRepository(Student::class)->findAll();
+        $editForms = [];
+        foreach ($students as $s) {
+            $editForms[$s->getId()] = $this->createForm(StudentType::class, $s, [
+                'action' => $this->generateUrl('app_student_edit', ['id' => $s->getId()]),
+                'method' => 'POST',
+            ])->createView();
+        }
+
+        $editForms[$student->getId()] = $form->createView();
+        return $this->render('student/index.html.twig', [
+            'students' => $students,
+            'form' => $this->createForm(StudentType::class, new Student())->createView(),
+            'editForms' => $editForms,
+        ]);
+
+        return $this->redirectToRoute('app_student_index'); // fallback
     }
 
 

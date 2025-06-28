@@ -326,7 +326,7 @@
                                         <!-- Edit Modal -->
                                         {% for students in students %}
                                                     <div class="modal fade" id="editModal{{ students.id }}" tabindex="-1" aria-labelledby="editModalLabel{{ students.id }}" aria-hidden="true">
-                                                        <div class="modal-dialog">
+                                                        <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
                                                             {% if editForms[students.id].vars.errors|length > 0 %}
                                                                 <div class="alert alert-danger">
@@ -339,10 +339,38 @@
                                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        {{ form_row(editForms[students.id].name) }}
+                                                                    <div class="row mb-4">
+                                                                        {{ form_label(editForms[students.id].studentNumber, 'Student Number', {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
+                                                                        <div class="col-sm-9">
+                                                                            {{ form_widget(editForms[students.id].studentNumber, {'attr': {'class': 'form-control'}}) }}
+                                                                            {{ form_errors(editForms[students.id].studentNumber) }}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row mb-4">
+                                                                        {{ form_label(editForms[students.id].name, 'Student Name', {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
+                                                                        <div class="col-sm-9">
+                                                                            {{ form_widget(editForms[students.id].name, {'attr': {'class': 'form-control'}}) }}
+                                                                            {{ form_errors(editForms[students.id].name) }}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row mb-4">
+                                                                        {{ form_label(editForms[students.id].course, 'Student Course', {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
+                                                                        <div class="col-sm-9">
+                                                                            {{ form_widget(editForms[students.id].course, {'attr': {'class': 'form-control'}}) }}
+                                                                            {{ form_errors(editForms[students.id].course) }}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row mb-4">
+                                                                        {{ form_label(editForms[students.id].section, 'Student Section', {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
+                                                                        <div class="col-sm-9">
+                                                                            {{ form_widget(editForms[students.id].section, {'attr': {'class': 'form-control'}}) }}
+                                                                            {{ form_errors(editForms[students.id].section) }}
+                                                                        </div>
+                                                                    </div>
+                                                                        {# {{ form_row(editForms[students.id].name) }}
                                                                         {{ form_row(editForms[students.id].course) }}
                                                                         {{ form_row(editForms[students.id].section) }}
-                                                                        {{ form_row(editForms[students.id].studentNumber) }}
+                                                                        {{ form_row(editForms[students.id].studentNumber) }} #}
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

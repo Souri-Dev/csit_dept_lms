@@ -142,8 +142,6 @@ final class StudentController extends AbstractController
     }
 
 
-
-
     #[Route('/student/{id}', name: 'app_student_show')]
     public function show(Student $student): Response
     {

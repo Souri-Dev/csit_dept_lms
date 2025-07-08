@@ -197,7 +197,11 @@
                 <div class="page-content">
                     <div class="container-fluid">
 
-                        {{ include('partials/page-title.html.twig', {pagetitle: 'Class', title: 'Class List'}) }}
+                        {{ include('partials/page-title.html.twig', {pagetitle: 'Dashboard', title: 'Class List',
+    backLink: {
+        url: path('app_dashboard'),
+        label: 'Back to Dashboard'
+    }}) }}
 
                         <div class="row">
                             <div class="col-lg-12">
@@ -356,6 +360,11 @@
                                                                 data-bs-toggle="modal" 
                                                                 data-bs-target="#editModal{{ schoolClasses.id }}">
                                                                 Edit
+                                                            </button>
+                                                            <button class="btn btn-primary">
+                                                                <a href="{{ path('app_subject_sections', { id: schoolClasses.id }) }}" class="text-white">
+                                                                    View Sections
+                                                                </a>
                                                             </button>
                                                         </td>
                                                     </tr>

@@ -1,0 +1,232 @@
+{# <h1>Students in Section
+	{{ section.sectionName }}</h1>
+
+{% if section.students is not empty %}
+	<ul>
+		{% for student in section.students %}
+			<li>{{ student.name }}</li>
+		{% endfor %}
+	</ul>
+{% else %}
+	<p>No students found in this section.</p>
+{% endif %} #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	<!-- Begin page -->
+	<div id="layout-wrapper">
+
+		{{ include('partials/menu.html.twig') }}
+
+		<!-- ============================================================== -->
+		<!-- Start right Content here -->
+		<!-- ============================================================== -->
+			<div class="main-content"> <div class="page-content">
+				<div class="container-fluid">
+
+					{{ include('partials/page-title.html.twig', {pagetitle: 'Sections', title: 'Students in Section ' ~ section.sectionName,
+    backLink: {
+        url: path('app_subject_sections', { id: schoolClass.id }),
+        label: 'Back to Classes'
+    } }) }}
+
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="card">
+								<div class="card-body">
+									<div class="row mb-2">
+										<div class="col-md-6">
+											<button type="button" class="btn btn-success waves-effect waves-light mb-3" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl">Add Students</button>
+											<!--  Extra Large modal example -->
+											<div class="modal fade bs-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+												<div class="modal-dialog modal-xl">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="myExtraLargeModalLabel">Add Section</h5>
+															<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+														</div>
+														<div class="modal-body">
+															<div class="col-lg-12 ms-lg-auto">
+																<div class="mt-5 mt-lg-4">
+																	{{ form_start(form) }}
+																	{{ form_widget(form) }}
+																	<button class="btn btn-primary">Add Section</button>
+																</div>
+															</div>
+
+														</div>
+													</div>
+													<!-- /.modal-content -->
+												</div>
+												<!-- /.modal-dialog -->
+											</div>
+											<!-- /.modal -->
+										</div>
+										<div class="col-md-6">
+											<div class="form-inline float-md-end mb-3">
+												<div class="search-box ms-2">
+													<div class="position-relative">
+														<input type="text" class="form-control rounded bg-light border-0" placeholder="Search...">
+														<i class="mdi mdi-magnify search-icon"></i>
+													</div>
+												</div>
+
+											</div>
+										</div>
+										<div class="table-responsive mb-4">
+											<table class="table table-centered table-nowrap mb-0">
+												<thead>
+													<tr>
+														<th scope="col">Student Number</th>
+														<th scope="col">Name</th>
+														<th scope="col">Course</th>
+														<th scope="col">Section</th>
+														<th scope="col">QR</th>
+													</tr>
+												</thead>
+												<tbody>
+													{% for student in section.students %}
+														<tr>
+															<td>
+																<a href="#" class="text-body">{{ student.studentNumber }}</a>
+															</td>
+															<td>{{ student.name }}</td>
+															<td>{{ student.course }}</td>
+															<td>{{ student.section }}</td>
+															<td>
+																<a href="{{ path('app_student_qr', { id: student.id }) }}" target="_blank" class="text-body font-size-18">
+																	<img src="{{ path('app_student_qr', {id: student.id}) }}" alt="QR Code" width="100">
+																</a>
+															</td>
+														</tr>
+													{% endfor %}
+												</tbody>
+											</table>
+										</div>
+										<div class="row mt-4">
+											<div class="col-sm-6">
+												<div>
+													<p class="mb-sm-0">Showing 1 to 10 of 12 entries</p>
+												</div>
+											</div>
+											<div class="col-sm-6">
+												<div class="float-sm-end">
+													<ul class="pagination mb-sm-0 ">
+														<li class="page-item disabled">
+															<a href="#" class="page-link">
+																<i class="mdi mdi-chevron-left"></i>
+															</a>
+														</li>
+														<li class="page-item">
+															<a href="#" class="page-link">1</a>
+														</li>
+														<li class="page-item active">
+															<a href="#" class="page-link">2</a>
+														</li>
+														<li class="page-item">
+															<a href="#" class="page-link">3</a>
+														</li>
+														<li class="page-item">
+															<a href="#" class="page-link">
+																<i class="mdi mdi-chevron-right"></i>
+															</a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- end row -->
+
+					</div>
+					<!-- container-fluid -->
+				</div>
+				<!-- End Page-content -->
+
+
+				{# {{ include('partials/footer.html.twig') }} #}
+			</div>
+			<!-- end main content-->
+
+		</div>
+		<!-- END layout-wrapper -->
+
+		{{ include('partials/right-sidebar.html.twig') }}
+
+		{{ include('partials/vendor-scripts.html.twig') }}
+
+		<!-- App js -->
+		<script src="/js/app.js"></script>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', () => {
+document.querySelectorAll('.view-student-btn').forEach(button => {
+button.addEventListener('click', () => {
+const studentId = button.getAttribute('data-id');
+
+fetch (`/student/${studentId}/json`).then(response => response.json()).then(data => {
+document.getElementById('modalStudentName').textContent = data.name;
+document.getElementById('modalStudentNumber').textContent = data.studentNumber;
+document.getElementById('modalStudentCourse').textContent = data.course;
+document.getElementById('modalStudentSection').textContent = data.section;
+document.getElementById('modalStudentQr').setAttribute('src', data.qr);
+
+}).catch(err => {
+console.error('Failed to fetch student data:', err);
+});
+});
+});
+});
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+		<script>
+			function downloadProfilePDF() {
+const studentName = document.querySelector('#modalStudentName') ?. textContent.trim() || 'student_profile';
+const safeFileName = studentName.replace(/[^\w\s-]/g, '').replace(/\s+/g, '_');
+const modalContent = document.querySelector('.printable-pdf');
+const downloadButton = document.getElementById('download_button');
+
+// Temporarily hide the button in the live DOM
+if (downloadButton) 
+downloadButton.style.display = 'none';
+
+
+
+const options = {
+margin: 0.5,
+filename: `${safeFileName}_profile.pdf`,
+image: {
+type: 'jpeg',
+quality: 0.98
+},
+html2canvas: {
+scale: 2
+},
+jsPDF: {
+unit: 'in',
+format: [
+11, 6.5
+],
+orientation: 'landscape'
+}
+};
+
+setTimeout(() => {
+html2pdf().set(options).from(modalContent).save().then(() => { // Show the button again after saving the PDF
+if (downloadButton) 
+downloadButton.style.display = '';
+
+
+
+});
+}, 300);
+}
+		</script>
+
+	{% endblock %}

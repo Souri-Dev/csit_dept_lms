@@ -50,7 +50,10 @@ final class ClassSectionController extends AbstractController
         EntityManagerInterface $em
     ): Response {
 
-        $form = $this->createForm(ClassSectionTypeForm::class, $section);
+        $form = $this->createForm(ClassSectionTypeForm::class, $section, [
+            'hide_section_name' => true, // Hide section name field in this form
+            'section' => $section,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
